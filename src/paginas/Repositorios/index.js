@@ -8,7 +8,7 @@ export default function Repositorios({ route, navigation }) {
     const [repo, setRepo] = useState([]);
     const estaNaTela = useIsFocused();
     useEffect(async () => {
-        const resultado = await ObterRepositoriosUsuario(route.params.id);
+        const resultado = await ObterRepositoriosUsuario(route.params.login);
         setRepo(resultado);
     }, [estaNaTela]);
     return (
@@ -30,7 +30,7 @@ export default function Repositorios({ route, navigation }) {
                         onPress={() => navigation.navigate('InfoRepositorio', { item })}
                    >
                         <Text style={estilos.repositorioNome}>{item.name}</Text>
-                        <Text style={estilos.repositorioData}>Atualizado em {item.data}</Text>
+                        <Text style={estilos.repositorioData}>Atualizado em { new Date(item.updated_at).toLocaleString() }</Text>
                     </TouchableOpacity>
                 }}>
             </FlatList>
